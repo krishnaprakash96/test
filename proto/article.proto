@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto;
+
+// ListArticle response
+message ListArticlesResponse {
+    bool status = 1;
+    repeated ListArticlesBody ArticleLists = 2;
+}
+
+// ListArticle request
+message ListArticlesBody {
+    string title = 1;
+    string description = 2;
+}
+
+message Author {
+    string name = 1;
+    string emailid = 2;
+}
+
+message CreateArticleRequest {
+    string title = 1;
+    string description = 2;
+    Author authorDetails = 3;
+    string time = 4;
+}
+
+message CreateArticleResponse {
+    bool status = 1;
+}
+
+service articleStore {
+    rpc ListArticles(ListArticlesBody) returns (ListArticlesResponse) {}
+    rpc CreateArticles(CreateArticleRequest) returns (CreateArticleResponse) {}
+}
